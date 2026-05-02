@@ -1,0 +1,31 @@
+# Python & virtual environment
+__pycache__/
+*.py[cod]
+*.so
+.Python
+myvenv/
+venv/
+env/
+.env
+*.egg-info/
+dist/
+build/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.pid
+
+# No model files are ignored – they will be uploaded with Git LFS
