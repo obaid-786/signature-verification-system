@@ -11,45 +11,73 @@
     <div class="container">
         <div class="header">
             <h1>🔍 Signature Verification System</h1>
-            <p>AI-powered handwritten signature authentication (English model)</p>
+            <p>AI-powered handwritten signature authentication</p>
         </div>
 
-        <div class="card">
-            <div class="form-group">
-                <label for="personSelect">Select Person ID</label>
-                <select id="personSelect" class="form-control">
-                    <option value="">-- Loading persons --</option>
-                </select>
-            </div>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="verify">Verify Signature</button>
+            <button class="tab-btn" data-tab="browse">Browse Dataset</button>
+        </div>
 
-            <div class="form-group">
-                <label for="fileInput">Upload Signature Image</label>
-                <div class="file-dropzone" id="fileDropzone">
-                    <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg" hidden>
-                    <div class="dropzone-content">
-                        <span class="upload-icon">📁</span>
-                        <p>Drag & drop or click to upload</p>
-                        <small>PNG, JPG (max 5MB)</small>
+        <div id="verifyTab" class="tab-content active">
+            <div class="card">
+                <div class="form-group">
+                    <label for="personSelect">Select Person ID</label>
+                    <select id="personSelect" class="form-control">
+                        <option value="">-- Loading persons --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fileInput">Upload Signature Image</label>
+                    <div class="file-dropzone" id="fileDropzone">
+                        <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg" hidden>
+                        <div class="dropzone-content">
+                            <span class="upload-icon">📁</span>
+                            <p>Drag & drop or click to upload</p>
+                            <small>PNG, JPG (max 5MB)</small>
+                        </div>
                     </div>
+                    <div id="previewContainer" class="preview-container"></div>
                 </div>
-                <div id="previewContainer" class="preview-container"></div>
+                <button id="verifyBtn" class="btn btn-primary" disabled>
+                    <span class="btn-text">Verify Signature</span>
+                    <span class="spinner hidden"></span>
+                </button>
+                <div id="resultContainer" class="result-container hidden">
+                    <div class="result-header"><h3>Verification Result</h3></div>
+                    <div id="resultContent"></div>
+                </div>
             </div>
+        </div>
 
-            <button id="verifyBtn" class="btn btn-primary" disabled>
-                <span class="btn-text">Verify Signature</span>
-                <span class="spinner hidden"></span>
-            </button>
-
-            <div id="resultContainer" class="result-container hidden">
-                <div class="result-header">
-                    <h3>Verification Result</h3>
+        <div id="browseTab" class="tab-content" style="display: none;">
+            <div class="card">
+                <h3>📂 CEDAR55 Dataset Browser</h3>
+                <div class="form-group">
+                    <label for="browsePersonSelect">Select Person</label>
+                    <select id="browsePersonSelect" class="form-control">
+                        <option value="">-- Load persons --</option>
+                    </select>
                 </div>
-                <div id="resultContent"></div>
+                <div id="signatureGrid" class="signature-grid"></div>
             </div>
         </div>
 
         <div class="info-footer">
             <p>⚡ Powered by TensorFlow & Hybrid Ensemble | Model trained on CEDAR55 dataset</p>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Login Required</h3>
+            <p>Please log in to browse the dataset.</p>
+            <input type="text" id="loginUsername" placeholder="Username" class="form-control" style="margin-bottom: 10px;">
+            <input type="password" id="loginPassword" placeholder="Password" class="form-control" style="margin-bottom: 10px;">
+            <button id="loginSubmitBtn" class="btn btn-primary">Login</button>
+            <div id="loginError" style="color: red; margin-top: 10px;"></div>
         </div>
     </div>
 
