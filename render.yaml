@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: signature-verification
+    runtime: python
+    plan: free
+    build:
+      environment: x86_64          # Forces x86_64 architecture
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATASET_DIR
+        value: /opt/render/project/src/backend/dataset/cedar55
+      - key: SECRET_KEY
+        generateValue: true
