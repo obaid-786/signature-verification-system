@@ -4,7 +4,10 @@ services:
     runtime: python
     plan: free
     build:
-      environment: x86_64          # Forces x86_64 architecture
+      environment: x86_64   
+      env:          # <-- This is for build-time environment variables
+        - key: PYTHON_VERSION
+          value: 3.10       # Forces x86_64 architecture
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
